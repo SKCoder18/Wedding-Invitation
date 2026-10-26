@@ -1,0 +1,89 @@
+/* The book's 3D parents must never use overflow:hidden, filters, or opacity:
+   those flatten the sheet and break its two independently visible faces. */
+.book-stage{--leaf-time:2200ms;width:min(1040px,100%);height:590px;margin:0 auto;perspective:2200px;perspective-origin:50% 35%;position:relative}
+.bound-book{height:100%;position:relative;transform-style:preserve-3d;transition:transform var(--leaf-time) cubic-bezier(.25,.65,.2,1);transform:translateX(0) rotateX(5deg)}
+.is-closed .bound-book{transform:translateX(-25%) rotateX(5deg) rotateY(-7deg)}
+.book-binding{position:absolute;inset:-8px;background:#3a0a1a;border:2px solid #a88547;border-radius:5px 10px 10px 5px;box-shadow:0 25px 50px #13020899,0 7px 0 #1d0710;transform:translateZ(-4px)}
+.is-closed .book-binding{left:50%}
+.book-left,.book-right{position:absolute;top:0;bottom:0;width:50%;box-shadow:0 2px 0 #d3bd99,0 4px 0 #efdfc1,0 6px 0 #ba9b70}
+.book-left{left:0}.book-right{left:50%}
+.is-closed .book-left{visibility:hidden}
+.book-gutter{position:absolute;top:0;bottom:0;left:calc(50% - 18px);width:36px;z-index:2;background:linear-gradient(90deg,transparent,#3d241226 35%,#25150c66 49%,#fff4d72e 52%,#674b2a29 65%,transparent);pointer-events:none;transform:translateZ(1px)}
+.is-closed .book-gutter{left:50%;width:13px;background:linear-gradient(90deg,#19061090,transparent)}
+.book-right>.panel,.book-face>.panel{padding:35px 29px}
+.book-right .couple-layout,.book-face .couple-layout{display:flex;align-items:center;justify-content:center;flex-direction:column;gap:24px}
+.book-right .portrait,.book-face .portrait{display:none}
+.book-right .couple-copy h2,.book-face .couple-copy h2{font-size:43px}
+.book-right .couple-copy h3,.book-face .couple-copy h3{font-size:34px}
+.book-right .finale h2,.book-face .finale h2{font-size:36px}
+.book-right .finale .lotus,.book-face .finale .lotus{display:inline-block}
+.book-right .couple-copy .divider,.book-face .couple-copy .divider{margin:30px auto}
+.book-right .panel-0,.book-face .panel-0{padding:35px 20px}
+.book-stage .cover-content{height:100%;justify-content:center}
+.book-stage .cover-content .lotus{margin:0 0 22px}
+.book-stage .cover-content .seal{margin-top:25px}
+.verso{position:relative;height:100%;padding:38px 32px;background:radial-gradient(ellipse at 20% 30%,#fff9ed,#ecddc1);color:#33221c;overflow:hidden}
+.book-photo{height:calc(100% - 28px);padding:14px 12px 0;border:1px solid #ac8549;border-radius:190px 190px 3px 3px;background:#dfcca8;overflow:hidden}
+.book-photo img{width:100%;height:100%;object-fit:contain;display:block}
+.verso-caption{font-size:8px;letter-spacing:2px;margin-top:15px}
+.verso-ornament{height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:28px}
+.verso-ornament h2{font-size:40px;max-width:280px;line-height:1.2}
+.verso-monogram{font:60px 'Cormorant Garamond',Georgia,serif;color:#a48144;border:1px solid #b6976070;border-radius:50%;width:155px;height:155px;display:flex;align-items:center;justify-content:center;gap:8px}
+.verso-monogram em{font-size:30px}
+.folio{position:absolute;bottom:18px;left:0;right:0;text-align:center;font-family:Georgia,serif;font-size:9px;color:#927548;pointer-events:none}
+.book-right:has(.panel-0)>.folio{display:none}
+.book-leaf{position:absolute;top:0;left:50%;width:50%;height:100%;transform-origin:0% 50%;transform-style:preserve-3d;z-index:8;will-change:transform}
+.book-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:#fff7e7;box-shadow:0 0 1px 1px #b69a70}
+.face-front{transform:translateZ(.7px)}
+.face-back{transform:rotateY(180deg) translateZ(.7px)}
+.hard-cover .face-front{transform:translateZ(2px)}
+.hard-cover .face-back{transform:rotateY(180deg) translateZ(2px)}
+.flip-forward{animation:book-turn-forward var(--leaf-time) cubic-bezier(.3,.05,.25,1) both}
+.flip-backward{animation:book-turn-backward var(--leaf-time) cubic-bezier(.3,.05,.25,1) both}
+/* A single interpolation keeps angular velocity continuous through the spine. */
+@keyframes book-turn-forward{from{transform:rotateY(0deg)}to{transform:rotateY(-180deg)}}
+@keyframes book-turn-backward{from{transform:rotateY(-180deg)}to{transform:rotateY(0deg)}}
+.leaf-light{position:absolute;inset:0;pointer-events:none;background:linear-gradient(90deg,#26160990,transparent 18%,#fffaf52b 65%,#69472340);animation:leaf-light var(--leaf-time) ease both}
+.face-back .leaf-light{background:linear-gradient(270deg,#26160980,transparent 30%,#fffaf540)}
+@keyframes leaf-light{0%,100%{opacity:.1}45%,60%{opacity:.85}}
+.cast-shadow{position:absolute;inset:0 0 0 50%;z-index:3;pointer-events:none;transform-origin:left;background:linear-gradient(90deg,#25130cc7,#39220c60 35%,transparent);animation:cast-page-shadow var(--leaf-time) ease both}
+@keyframes cast-page-shadow{0%,100%{opacity:0;transform:scaleX(.15)}40%{opacity:.7;transform:scaleX(.9)}70%{opacity:.4;transform:scaleX(.4)}}
+.is-opening .book-left{animation:reveal-left var(--leaf-time) both}
+@keyframes reveal-left{0%,40%{visibility:hidden}41%,100%{visibility:visible}}
+.motion-toggle{border:1px solid #c5a05970;background:transparent;color:#e5c98b;padding:8px 12px;min-height:36px;font-size:10px;letter-spacing:.4px}
+.motion-note{margin:18px 0 0;font-size:11px;color:#dfc79c}.motion-note button{border:0;background:none;text-decoration:underline;color:inherit;font:inherit;min-height:36px}
+.gentle-motion .bound-book{transition:none;transform:none}.gentle-motion.is-closed .bound-book{transform:translateX(-25%)}
+@media(max-width:900px) and (min-width:701px){.book-stage{height:590px}.book-right .panel,.book-face .panel{padding:32px 22px}.book-stage h1{font-size:38px}.book-right .couple-copy h2,.book-face .couple-copy h2{font-size:35px}.book-stage .event-date{font-size:25px}.book-stage .families h4{font-size:21px}.book-stage .center-content h2{font-size:33px}}
+@media(max-width:700px){
+ .book-stage{height:570px;width:100%;perspective:1600px;perspective-origin:30% 40%}
+ .bound-book{transform:none}.is-closed .bound-book{transform:rotateY(-5deg)}
+ .book-left{left:-94%;width:100%}.book-right{left:6%;width:94%}
+ .book-binding{left:4%;right:-5px}.is-closed .book-binding{left:4%}
+ .book-gutter,.is-closed .book-gutter{left:4%;width:18px}
+ .book-leaf{left:6%;width:94%}
+ .cast-shadow{left:6%}
+ .is-turning.full-motion .bound-book{animation:mobile-book-view var(--leaf-time) ease-in-out both}
+ @keyframes mobile-book-view{0%,100%{transform:translateX(0) scale(1)}35%,65%{transform:translateX(23%) scale(.68)}}
+ .book-right>.panel,.book-face>.panel{padding:28px 22px}
+ .book-right .portrait,.book-face .portrait{display:block;width:170px;height:255px}
+ .book-right .couple-layout,.book-face .couple-layout{gap:17px}
+ .book-right .couple-copy h2,.book-face .couple-copy h2{font-size:28px}
+ .book-right .couple-copy h3,.book-face .couple-copy h3{font-size:24px}
+ .book-right .couple-copy .divider,.book-face .couple-copy .divider{margin:12px auto}
+ .book-right .finale .portrait,.book-face .finale .portrait{width:120px;height:180px}
+ .book-right .finale h2,.book-face .finale h2{font-size:25px}
+ .book-right .finale .lotus,.book-face .finale .lotus{display:none}
+ .book-stage h1{font-size:37px}.book-stage .intro{font-size:16px}
+ .book-stage .center-content h2{font-size:30px}
+ .book-stage .families h4{font-size:20px}
+ .book-stage .event .event-date{font-size:23px}
+ .book-stage .folio{bottom:12px;font-size:7px}
+ .book-stage .verso{padding:28px 20px}
+ .book-stage .verso-ornament h2{font-size:30px}
+ .book-stage .verso-monogram{width:110px;height:110px;font-size:40px}
+ .motion-toggle{font-size:8px;padding:6px 8px}.header-label{display:none}
+ .gentle-motion.is-closed .bound-book{transform:none}
+}
+@media(max-width:350px){.book-right>.panel,.book-face>.panel{padding:26px 17px}.book-right .portrait,.book-face .portrait{width:152px;height:228px}.book-right .couple-copy h3,.book-face .couple-copy h3{font-size:22px}.book-stage h1{font-size:33px}.book-stage .cover-content .eyebrow{font-size:7px}.book-stage .small{font-size:9px}.book-right .finale h2,.book-face .finale h2{font-size:23px}}
+
+@media(max-width:700px){.book-stage:not(.is-turning) .book-left{visibility:hidden}}
