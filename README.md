@@ -1,4 +1,4 @@
-# Pavithra & Gnana Sekar — Wedding invitation
+# Pavithra & Gnanasekhar — Wedding invitation
 
 A React + TypeScript invitation with a two-page book with a center spine, two-sided turning leaves, a hard-cover opening and moving shadows, seven pages, the original couple photograph, responsive layouts, keyboard controls, reduced-motion support, countdown, and sharing.
 

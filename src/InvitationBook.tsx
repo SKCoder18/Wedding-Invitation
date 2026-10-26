@@ -8,9 +8,9 @@ function Verso({page}:{page:number}) {
   return <div className={`verso verso-${page}`}>
     <div className="paper-border"/>
     {page===1||page===6 ? <>
-      <div className="book-photo"><img src={wedding.photo} alt="V Pavithra and M Gnana Sekar together"/></div>
-      <p className="verso-caption">PAVITHRA & GNANA SEKAR</p>
-    </> : <div className="verso-ornament"><Lotus/><p className="eyebrow">PAVITHRA & GNANA SEKAR</p><h2><i>{titles[page]}</i></h2><div className="verso-monogram">P <em>&</em> G</div><p className="eyebrow">16 · 11 · 2026</p></div>}
+      <div className="book-photo"><img src={wedding.photo} alt="V Pavithra and M. Gnanasekhar together"/></div>
+      <p className="verso-caption">PAVITHRA & GNANASEKHAR</p>
+    </> : <div className="verso-ornament"><Lotus/><p className="eyebrow">PAVITHRA & GNANASEKHAR</p><h2><i>{titles[page]}</i></h2><div className="verso-monogram">P <em>&</em> G</div><p className="eyebrow">16 · 11 · 2026</p></div>}
     <span className="folio">{String(Math.max(1,page*2-1)).padStart(2,'0')}</span>
   </div>;
 }
