@@ -17,7 +17,7 @@ function Verso({page}:{page:number}) {
 
 /** One physical leaf, hinged at the center. Its back becomes the next verso.
  * Back navigation reverses the same geometry, from -180deg to 0deg. */
-export function InvitationBook({page,turn,ready,motion,share,onTurnEnd}:{page:number;turn:Turn|null;ready:boolean;motion:boolean;share:()=>void;onTurnEnd:()=>void}) {
+export function InvitationBook({page,turn,ready,motion,share,onTurnEnd,onOpen}:{page:number;turn:Turn|null;ready:boolean;motion:boolean;share:()=>void;onTurnEnd:()=>void;onOpen:()=>void}) {
   const forward=!!turn&&turn.to>turn.from;
   const closed=page===0&&!turn;
   const left=turn?(forward?turn.from:turn.to):page;
@@ -26,7 +26,7 @@ export function InvitationBook({page,turn,ready,motion,share,onTurnEnd}:{page:nu
     <div className="bound-book">
       <div className="book-binding" aria-hidden="true"/>
       <div className="book-left" aria-hidden={closed||!!turn} inert={closed||!!turn}><Verso page={left}/></div>
-      <div className="book-right" aria-hidden={!!turn} inert={!!turn}><Panel page={right} share={share}/><span className="folio">{String(right*2).padStart(2,'0')}</span></div>
+      <div className="book-right" aria-hidden={!!turn} inert={!!turn}><Panel page={right} share={share}/>{closed&&<button className="cover-open-target" onClick={onOpen} disabled={!ready} aria-label="Tap the invitation cover to open"><span>Tap to open <span aria-hidden="true">↗</span></span></button>}<span className="folio">{String(right*2).padStart(2,'0')}</span></div>
       <div className="book-gutter" aria-hidden="true"/>
       {turn&&motion&&<>
         <div className={`cast-shadow ${forward?'shadow-forward':'shadow-backward'}`} aria-hidden="true"/>

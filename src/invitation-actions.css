@@ -1,0 +1,39 @@
+/* A persistent, unmistakable next step, including on short WhatsApp browsers. */
+.experience{padding-bottom:158px}
+.action-dock{position:fixed;z-index:30;bottom:0;left:0;right:0;padding:14px 24px max(12px,env(safe-area-inset-bottom));background:linear-gradient(110deg,#340b19,#551328 50%,#340b19);border-top:1px solid #c5a05980;box-shadow:0 -12px 35px #23071250;text-align:center}
+.action-caption{font-family:'Cormorant Garamond',Georgia,serif;font-size:18px;color:#fff0d1;line-height:1.3}
+.action-dock .navigation{margin:10px auto 0;height:auto;min-height:54px;max-width:480px;gap:20px;justify-content:center}
+.action-dock .open-button,.action-dock .next-page{background:linear-gradient(115deg,#edcf91,#d9b369 55%,#efcf8d);border:1px solid #f9e5b9;color:#3a1020;box-shadow:0 5px 18px #18060e60,inset 0 1px 0 #fff3cf;min-height:54px;font-size:12px;font-weight:600;letter-spacing:1.4px;transition:background .2s,box-shadow .2s}
+.action-dock .open-button{width:min(360px,100%);padding:16px 22px}
+.action-dock .open-button:hover,.action-dock .next-page:hover{background:#f7dca5;box-shadow:0 6px 22px #18060e80}
+.action-dock .next-page{padding:12px 20px;letter-spacing:.4px;white-space:nowrap}
+.action-dock .hint{margin:8px 0 0;font-size:12px;color:#e2c9a7;font-style:normal}
+.action-dock .nav-button:not(.next-page){font-size:12px;min-height:48px}
+.action-dock button:focus-visible{outline:3px solid #fff7e7;outline-offset:3px}
+.cover-open-target{position:absolute;inset:0;width:100%;border:0;background:transparent;cursor:pointer;color:#f6dfa8;display:flex;align-items:flex-end;justify-content:center;padding:0 0 25px}
+.cover-open-target>span{font:500 10px 'Jost',sans-serif;letter-spacing:1.5px;text-transform:uppercase;display:flex;gap:10px;align-items:center;border-bottom:1px solid #c5a05980;padding-bottom:4px}
+.cover-open-target:focus-visible{outline:3px solid #efd198;outline-offset:-12px}
+.book-stage .cover-content{padding-bottom:24px}
+@media(max-width:700px){.action-dock{padding:12px 18px max(10px,env(safe-area-inset-bottom))}.action-caption{font-size:16px}.action-dock .navigation{gap:9px;justify-content:space-between}.action-dock .navigation:has(.open-button){justify-content:center}.action-dock .next-page{padding:12px 14px;font-size:11px}.action-dock .open-button{font-size:11px}.action-dock .hint{font-size:10px}.action-dock .page-dots button{width:19px}.cover-open-target{padding-bottom:23px}}
+@media(max-width:350px){.action-dock{padding-inline:12px}.action-caption{font-size:15px}.action-dock .navigation{gap:4px}.action-dock .next-page{padding-inline:10px}.action-dock .nav-button:not(.next-page){min-width:48px}.action-dock .page-dots button{width:17px}}
+@media(max-height:500px) and (orientation:landscape){.action-dock{padding-top:8px}.action-caption{display:none}.action-dock .navigation{margin-top:0;min-height:44px}.action-dock .open-button,.action-dock .next-page{min-height:44px;padding-block:10px}.action-dock .hint{margin-top:4px}.experience{padding-bottom:110px}}
+/* Compact the closed cover on short screens so the names and gold action fit together. */
+@media(max-height:740px){
+ .experience:has(.is-closed) header,.experience:has(.is-opening) header{height:48px}
+ .experience:has(.is-closed) .scene-heading,.experience:has(.is-opening) .scene-heading{margin:12px 0 16px}
+ .experience:has(.is-closed) .scene-heading p,.experience:has(.is-opening) .scene-heading p{display:none}
+ .book-stage:is(.is-closed,.is-opening){height:max(300px,calc(100svh - 235px))}
+ .book-stage:is(.is-closed,.is-opening) .panel-0{padding:23px 18px}
+ .book-stage:is(.is-closed,.is-opening) .cover-content{padding-bottom:15px}
+ .book-stage:is(.is-closed,.is-opening) .cover-content .lotus{height:24px;width:47px;margin:0 0 8px;flex-shrink:0}
+ .book-stage:is(.is-closed,.is-opening) .intro{font-size:15px;margin:8px 0}
+ .book-stage:is(.is-closed,.is-opening) h1{font-size:32px}
+ .book-stage:is(.is-closed,.is-opening) h1 em{font-size:22px;margin:4px 0}
+ .book-stage:is(.is-closed,.is-opening) .divider{margin:9px auto}
+ .book-stage:is(.is-closed,.is-opening) .cover-content .small{margin-top:6px;font-size:7px}
+ .book-stage:is(.is-closed,.is-opening) .cover-content .seal{display:none}
+ .book-stage:is(.is-closed,.is-opening) .date{font-size:9px}
+ .book-stage:is(.is-closed,.is-opening) .cover-open-target{padding-bottom:18px}
+ .book-stage:is(.is-closed,.is-opening) .cover-open-target>span{font-size:8px}
+}
+.experience>main{z-index:2}
