@@ -1,0 +1,3 @@
+import {defineConfig} from 'vite';
+import {readFile} from 'node:fs/promises';
+export default defineConfig({plugins:[{name:'local-only-invitation-tools',configureServer(server){server.middlewares.use(async(req,res,next)=>{const files:Record<string,string>={'/__local/guest-links':'guest-links.html','/__local/social-preview':'social-preview.html'};const file=files[(req.url||'').split('?')[0]];if(!file)return next();try{res.setHeader('Content-Type','text/html; charset=utf-8');res.setHeader('Cache-Control','no-store');res.end(await readFile(new URL('./tools/'+file,import.meta.url),'utf8'))}catch{res.statusCode=500;res.end('Local tool unavailable')}})}}]});
