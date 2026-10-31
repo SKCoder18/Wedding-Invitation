@@ -8,3 +8,7 @@ for(const [kind,start,end] of [['reception','20261115T140000Z','20261115T160000Z
 assert.equal(util.guestName(),'Sai & Family');for(const name of ['Sai & Family','పవిత్ర కుటుంబం','<script>alert(1)</script>'])assert.equal(new URL(util.guestLink('https://example.com/?old=1#x',name,'te')).searchParams.get('guest'),name);
 console.log('PASS: both calendar times, venue, ICS folding and personalized Unicode links');
 
+
+assert.equal(new URL(util.guestLink("https://example.com/?side=groom", "Guest", "te")).searchParams.get("side"), "groom");
+assert.equal(new URL(util.guestLink("https://example.com/?side=unknown", "Guest")).searchParams.get("side"), "bride");
+console.log("PASS: sharing preserves groom side and defaults invalid sides to bride");
